@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Estudi de mercat · Ortopròtesi · Nou Barris</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+   <header class="header">
+
+    <div class="header-info">
+        <div class="small-title">ESTUDI DE MERCAT · ORTOPRÒTESI</div>
+        <h1>Nou Barris</h1>
+    </div>
+
+    <p class="integrantes">Clara Díaz · Mireia Santamaria · Aaron Polo· Alindisei Custodio</p>
+
+</header>
+
+
+    <main>
+
+
+        <section class="explorador">
+
+            <div class="map-container">
+                <div id="map"></div>
+
+                
+                <div class="leyenda-mapa">
+                    <div><span class="leyenda-punto principal"></span>Ortopèdies</div>
+                    <div><span class="leyenda-punto farmacia"></span> Farmàcies</div>
+                    <div><span class="leyenda-punto distribuidor"></span> Distribuïdor</div>
+                    <div><span class="leyenda-punto cap"></span> CAP</div>
+                    <div><span class="leyenda-punto cuap"></span> CUAP</div>
+                </div>
+
+            </div>
+
+            <aside id="barrio-panel" class="barrio-panel">
+
+                <button id="cerrar-panel" class="cerrar-panel">×</button>
+
+               <div class="barrio-etiqueta">DISTRICTE</div>
+                <h2 id="barrio-nombre">Seleccioneu Nou Barris</h2>
+
+                
+            <nav class="panel-navegacion">
+
+                <button class="nav-item active" data-seccion="territorio">
+                    Territori i context
+                </button>
+
+                <button class="nav-item" data-seccion="perfil">
+                   Perfil de la població
+                </button>
+
+                <button class="nav-item" data-seccion="oferta">
+                    Oferta ortoprotèsica
+                </button>
+
+                <button class="nav-item" data-seccion="sanidad">
+                    Xarxa sanitària
+                </button>
+
+                <button class="nav-item" data-seccion="demanda">
+                    Demanda potencial
+                </button>
+
+                <button class="nav-item" data-seccion="cruce">
+                    Encreuament d'informació
+                </button>
+
+                <button class="nav-item" data-seccion="oportunidades">
+                    Oportunitats i conclusió
+                </button>
+
+            </nav>
+
+
+                <div class="barrio-contenido">
+                    <div class="panel-intro">
+                        Fes clic sobre el districte de <strong>Nou Barris</strong>
+                        per començar l'anàlisi.
+                    </div>
+                </div>
+
+                <div id="seccion-contenido" class="seccion-contenido"></div>
+
+            </aside>
+
+        </section>
+
+
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>

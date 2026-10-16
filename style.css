@@ -1,0 +1,5487 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --fondo: #f5f4f1;
+    --blanco: #ffffff;
+    --texto: #202020;
+    --gris: #777;
+    --gris-claro: #e5e3df;
+    --principal: #d65a3a;
+    --principal-claro: #f3d7ce;
+    --negro-suave: #303030;
+}
+
+/* =====================================
+   BASE
+   ===================================== */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+}
+
+
+main {
+    width: 96%;
+    max-width: 1700px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+
+/* =====================================
+   HEADER
+   ===================================== */
+
+.header {
+    padding: 28px 6% 20px;
+    background: var(--blanco);
+    border-bottom: 1px solid #ddd;
+}
+
+.small-title,
+.section-number,
+.barrio-etiqueta,
+.panel-bloque-titulo {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.small-title,
+.barrio-etiqueta {
+    color: var(--gris);
+}
+
+.header h1 {
+    margin: 7px 0 0;
+    font-size: 34px;
+    letter-spacing: -1px;
+}
+
+.header p {
+    margin: 6px 0 0;
+    color: var(--gris);
+}
+
+.nav-item {
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #777;
+    padding: 8px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.nav-item.active {
+    background: var(--principal);
+    border-color: var(--principal);
+    color: white;
+}
+
+.panel-navegacion .nav-item {
+    border: none;
+    background: #f4f4f4;
+    color: #666;
+    padding: 9px 11px;
+    border-radius: 6px;
+    font-size: 11px;
+}
+
+.panel-navegacion .nav-item:hover {
+    background: #e9e9e9;
+}
+
+.panel-navegacion .nav-item.active {
+    background: var(--principal);
+    color: white;
+}
+
+/* =====================================
+   HERO
+   ===================================== */
+
+.hero {
+    min-height: 360px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 50px;
+    align-items: center;
+}
+
+.section-number {
+    color: var(--principal);
+}
+
+.hero h2 {
+    max-width: 800px;
+    font-size: clamp(38px, 5vw, 68px);
+    line-height: .98;
+    letter-spacing: -3px;
+    margin: 16px 0;
+}
+
+.hero p {
+    max-width: 700px;
+    color: #666;
+    line-height: 1.7;
+}
+
+.hero-note {
+    background: #fff;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid var(--gris-claro);
+}
+
+.hero-note strong,
+.hero-note span {
+    display: block;
+}
+
+.hero-note strong {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--principal);
+    margin-bottom: 12px;
+}
+
+.hero-note span {
+    line-height: 1.5;
+}
+
+/* =====================================
+   EXPLORADOR · MAPA + PANEL
+   ===================================== */
+
+
+
+.explorador {
+    display: grid;
+    grid-template-columns: minmax(280px, .55fr) minmax(620px, 1.45fr);
+    gap: 24px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* Separación superior en escritorio */
+@media (min-width: 1051px) {
+    .explorador {
+        margin-top: 24px;
+    }
+}
+
+
+
+
+/* =====================================
+   MAPA
+   ===================================== */
+
+
+.map-container {
+    position: relative;
+    top: auto;
+    align-self: start;
+}
+
+
+
+#map {
+    width: 100%;
+    height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+
+.leyenda-mapa {
+    position: absolute;
+    z-index: 1000;
+    left: 18px;
+    bottom: 18px;
+    background: rgba(255,255,255,.94);
+    padding: 12px 14px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
+    font-size: 11px;
+    line-height: 1.9;
+}
+
+.leyenda-punto {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+
+.leyenda-punto.principal {
+    background: var(--principal);
+    border-radius: 50%;
+}
+
+.leyenda-punto.farmacia {
+    background: #8a8a8a;
+    border-radius: 4px;
+}
+
+.leyenda-punto.cap {
+    background: #7c9dc9;
+    border-radius: 50%;
+}
+
+.leyenda-punto.cuap {
+    background: #8056b3;
+    border-radius: 4px;
+}
+
+.leyenda-punto.distribuidor {
+    background: #666;
+    transform: rotate(45deg);
+}
+
+/* =====================================
+   PANEL PRINCIPAL
+   ===================================== */
+
+.barrio-panel {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    min-height: 520px;
+
+    background: var(--blanco);
+    border-radius: 20px;
+    padding: 30px;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+
+    display: none;
+}
+
+.barrio-panel.activo {
+    display: block;
+}
+
+.cerrar-panel {
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    border: 0;
+    background: transparent;
+    color: #777;
+    padding: 5px 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.barrio-panel h2 {
+    margin: 8px 35px 22px 0;
+    font-size: 31px;
+    line-height: 1.05;
+}
+
+.panel-intro {
+    color: #666;
+    line-height: 1.6;
+    padding: 20px 0;
+}
+
+/* =====================================
+   NAVEGACIÓN
+   ===================================== */
+
+.panel-navegacion {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 18px 0 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* =====================================
+   SECCIONES
+   ===================================== */
+
+.seccion-contenido {
+    display: none;
+    padding-top: 4px;
+}
+
+.seccion-contenido.activo {
+    display: block;
+}
+
+.seccion-etiqueta {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--principal);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.seccion-contenido h3 {
+    margin: 0 0 10px;
+    font-size: 25px;
+    line-height: 1.15;
+    font-weight: 600;
+    color: #222;
+}
+
+.seccion-intro {
+    margin: 0 0 20px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #666;
+}
+
+.seccion-cabecera {
+    border-bottom: 1px solid var(--gris-claro);
+    padding-bottom: 15px;
+    margin-bottom: 18px;
+}
+
+.seccion-cabecera h3 {
+    margin: 5px 0 0;
+    font-size: 25px;
+}
+
+.seccion-cabecera p {
+    color: #777;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.volver-secciones {
+    border: 0;
+    background: transparent;
+    padding: 0 0 16px;
+    color: var(--principal);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* =====================================
+   TARJETAS DE DATOS
+   ===================================== */
+
+.datos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.dato-card {
+    background: #f7f7f5;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    padding: 20px 15px;
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dato-card strong {
+    display: block;
+    font-size: 28px;
+    line-height: 1;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.dato-card span {
+    font-size: 11px;
+    line-height: 1.35;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+/* =====================================
+   BLOQUES DE INFORMACIÓN
+   ===================================== */
+
+.panel-bloque {
+    margin-top: 18px;
+    padding: 19px;
+    background: #fafafa;
+    border: 1px solid #e9e9e9;
+    border-radius: 10px;
+}
+
+.panel-bloque-titulo {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #888;
+    margin-bottom: 12px;
+}
+
+.panel-bloque p {
+    margin: 7px 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+}
+
+/* =====================================
+   LECTURA / INTERPRETACIÓN
+   ===================================== */
+
+.lectura-dato {
+    margin-top: 18px;
+    padding: 17px 18px;
+    border-left: 3px solid var(--principal);
+    background: #fff8f5;
+}
+
+.lectura-titulo {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: var(--principal);
+    margin-bottom: 7px;
+}
+
+.lectura-dato p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #555;
+}
+
+/* =====================================
+   METODOLOGÍA MINI
+   ===================================== */
+
+.metodologia-mini {
+    margin-top: 14px;
+    padding: 15px 16px;
+    background: #f3f3f1;
+    border-radius: 8px;
+}
+
+.metodologia-mini strong {
+    display: block;
+    font-size: 10px;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.metodologia-mini p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #777;
+}
+
+/* =====================================
+   GRÁFICAS · PERFIL
+   ===================================== */
+
+.grafico-bloque {
+    margin-top: 22px;
+    margin-bottom: 24px;
+    padding: 20px;
+
+    background: #fafafa;
+    border: 1px solid #e9e9e9;
+    border-radius: 11px;
+}
+
+.grafico-titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.grafico-subtitulo {
+    margin: 0 0 18px;
+    font-size: 11px;
+    color: #888;
+}
+
+.ranking-grafico {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.ranking-item {
+    width: 100%;
+}
+
+.ranking-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.ranking-cabecera span {
+    font-size: 11px;
+    color: #555;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.ranking-cabecera strong {
+    font-size: 11px;
+    color: #333;
+    flex-shrink: 0;
+}
+
+.ranking-barra {
+    width: 100%;
+    height: 7px;
+    background: var(--gris-claro);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.ranking-barra-relleno {
+    height: 100%;
+    background: var(--principal);
+    border-radius: 10px;
+    display: block;
+}
+
+.ranking-barra-relleno.mayores {
+    background: #777;
+}
+
+/* =====================================
+   OFERTA
+   ===================================== */
+
+.panel-oferta-resumen {
+    display: grid;
+    gap: 8px;
+}
+
+.panel-oferta-resumen > div {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 9px;
+    background: #f7f6f3;
+    border-radius: 10px;
+}
+
+.panel-oferta-resumen strong {
+    font-size: 22px;
+}
+
+.panel-oferta-resumen span {
+    color: #666;
+    font-size: 11px;
+}
+
+.panel-ayuda {
+    font-size: 11px !important;
+    color: #888 !important;
+}
+
+.oferta-indicadores,
+.demanda-indicadores,
+.sanidad-indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.oferta-indicador,
+.demanda-indicador,
+.sanidad-indicador {
+    padding: 16px 12px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.oferta-indicador strong,
+.demanda-indicador strong,
+.sanidad-indicador strong {
+    display: block;
+    font-size: 21px;
+    color: #333;
+}
+
+.oferta-indicador span,
+.demanda-indicador span,
+.sanidad-indicador span {
+    display: block;
+    margin-top: 6px;
+    font-size: 10px;
+    color: #777;
+    line-height: 1.3;
+}
+
+.oferta-intro p,
+.demanda-intro p,
+.sanidad-intro p,
+.cruce-intro p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.oferta-bloque,
+.demanda-nota,
+.sanidad-bloque,
+.cruce-bloque {
+    margin-top: 20px;
+    padding: 14px;
+    background: #f7f7f7;
+    border-left: 3px solid var(--principal);
+    border-radius: 6px;
+}
+
+.oferta-bloque strong,
+.demanda-nota strong,
+.sanidad-bloque strong,
+.cruce-bloque strong {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.oferta-bloque p,
+.demanda-nota p,
+.sanidad-bloque p,
+.cruce-bloque p {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #666;
+}
+
+/* =====================================
+   LISTAS DE OFERTA
+   ===================================== */
+
+.panel-oferta-lista {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.oferta-lista-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.oferta-lista-grupo strong {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #777;
+    margin-bottom: 3px;
+}
+
+.oferta-lista-grupo span {
+    display: block;
+    padding: 10px 12px;
+    background: #f7f7f7;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #333;
+}
+
+.establecimiento-lista {
+    padding: 12px 0;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.establecimiento-lista:last-child {
+    border-bottom: none;
+}
+
+.establecimiento-lista strong {
+    display: block;
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.establecimiento-lista span {
+    font-size: 11px;
+    color: #888;
+}
+
+/* =====================================
+   OFERTA · FICHAS
+   ===================================== */
+
+.visual-card {
+    background: #f7f6f3;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 12px;
+}
+
+.visual-card h4 {
+    margin: 0 0 12px;
+    font-size: 13px;
+}
+
+.oferta-contador {
+    background: #f7f6f3;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.ortopedia-tarjeta {
+    border-top: 1px solid var(--gris-claro);
+    padding-top: 15px;
+}
+
+.ortopedia-etiqueta {
+    font-size: 10px;
+    color: var(--principal);
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.ortopedia-tarjeta h3 {
+    font-size: 22px;
+    margin: 8px 0;
+}
+
+.ortopedia-descripcion {
+    color: #777;
+    line-height: 1.5;
+    font-size: 12px;
+}
+
+.ortopedia-grupo {
+    margin-top: 18px;
+}
+
+.ortopedia-grupo-titulo {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #888;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.ortopedia-caracteristicas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.ortopedia-caracteristicas span {
+    background: #f1efeb;
+    padding: 5px 8px;
+    border-radius: 99px;
+    font-size: 10px;
+}
+
+.ortopedia-extra {
+    margin-top: 18px;
+    border-top: 1px solid var(--gris-claro);
+}
+
+.ortopedia-extra div {
+    padding: 9px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.ortopedia-extra strong,
+.ortopedia-extra span {
+    display: block;
+}
+
+.ortopedia-extra strong {
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 2px;
+}
+
+.ortopedia-extra span {
+    font-size: 12px;
+}
+
+/* =====================================
+   ELEMENTOS AUXILIARES
+   ===================================== */
+
+.bar-row {
+    margin: 10px 0;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.bar-track {
+    height: 8px;
+    background: #ddd;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--principal);
+    border-radius: 99px;
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.kpi {
+    background: #f7f6f3;
+    border-radius: 12px;
+    padding: 13px;
+}
+
+.kpi strong {
+    display: block;
+    font-size: 23px;
+}
+
+.kpi span {
+    display: block;
+    color: #777;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.alerta-dato {
+    padding: 13px;
+    background: #fff8f5;
+    border-left: 3px solid var(--principal);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.filtro {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    margin: 8px 0;
+}
+
+.filtros-titulo {
+    margin: 15px 0 9px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #888;
+    font-weight: bold;
+}
+
+/* =====================================
+   CRUCE
+   ===================================== */
+
+.cruce-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cruce-card {
+    padding: 15px 10px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.cruce-label {
+    display: block;
+    font-size: 9px;
+    color: #888;
+    letter-spacing: .08em;
+}
+
+.cruce-card strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 20px;
+    color: #333;
+}
+
+.cruce-card small {
+    display: block;
+    margin-top: 5px;
+    font-size: 10px;
+    color: #777;
+}
+
+.cruce-comparacion {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 18px;
+}
+
+.cruce-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 13px;
+    background: #f7f7f5;
+    border-radius: 8px;
+}
+
+.cruce-item span {
+    font-size: 9px;
+    letter-spacing: .8px;
+    color: #777;
+}
+
+.cruce-item strong {
+    font-size: 14px;
+    color: #222;
+}
+
+/* =====================================
+   MATRIZ
+   ===================================== */
+
+.matriz {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+.matriz th,
+.matriz td {
+    border-bottom: 1px solid #ddd;
+    padding: 7px 4px;
+    text-align: left;
+}
+
+.matriz th {
+    color: #777;
+}
+
+.nivel {
+    font-weight: bold;
+}
+
+.nivel-alto {
+    color: var(--principal);
+}
+
+.nivel-medio {
+    color: #777;
+}
+
+.nivel-bajo {
+    color: #aaa;
+}
+
+/* =====================================
+   RESPONSIVE
+   ===================================== */
+
+@media (max-width: 1100px) {
+
+    .explorador {
+        grid-template-columns: minmax(340px, .8fr) minmax(500px, 1.2fr);
+        gap: 20px;
+    }
+
+    .barrio-panel {
+        padding: 26px;
+    }
+}
+
+@media (max-width: 1050px) {
+
+    .explorador {
+        grid-template-columns: 1fr;
+        padding-top: 20px;
+    }
+
+    .map-container {
+        position: relative;
+        top: auto;
+    }
+
+   
+    #map {
+        width: 100%;
+        height: 600px;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+
+    .barrio-panel {
+        max-height: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding: 60px 0;
+    }
+}
+
+@media (max-width: 700px) {
+
+    main {
+        width: 94%;
+    }
+
+    .header {
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+
+    .hero h2 {
+        font-size: 42px;
+    }
+
+    .datos-grid,
+    .oferta-indicadores,
+    .demanda-indicadores,
+    .sanidad-indicadores,
+    .cruce-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .barrio-panel {
+        padding: 22px;
+    }
+
+    .panel-navegacion {
+        gap: 5px;
+    }
+
+    .panel-navegacion .nav-item {
+        font-size: 10px;
+        padding: 8px 9px;
+    }
+
+    .grafico-bloque {
+        padding: 16px;
+    }
+}
+
+/* =====================================================
+   RESUMEN INICIAL · NOU BARRIS
+   ===================================================== */
+
+.panel-resumen {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.panel-dato-principal {
+    background: #f7f7f5;
+    border: 1px solid #e5e3df;
+    border-radius: 12px;
+    padding: 22px 18px;
+    min-height: 105px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.panel-dato-principal strong {
+    display: block;
+    font-size: 30px;
+    line-height: 1;
+    color: #222;
+    margin-bottom: 9px;
+}
+
+.panel-dato-principal span {
+    display: block;
+    font-size: 11px;
+    line-height: 1.35;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+
+/* =====================================================
+   DATOS DEL BARRIO
+   ===================================================== */
+
+.panel-datos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.panel-dato {
+    background: #f7f7f5;
+    border: 1px solid #e5e3df;
+    border-radius: 12px;
+    padding: 20px 15px;
+    min-height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.panel-dato strong {
+    display: block;
+    font-size: 27px;
+    line-height: 1;
+    color: #222;
+    margin-bottom: 9px;
+}
+
+.panel-dato span {
+    display: block;
+    font-size: 11px;
+    line-height: 1.35;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+
+/* =====================================================
+   NOTA DE OFERTA
+   ===================================================== */
+
+.panel-oferta-nota {
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: #f3f3f1;
+    border-radius: 8px;
+}
+
+.panel-oferta-nota p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.55;
+    color: #777;
+}
+
+
+
+/* =========================
+   SANIDAD
+   ========================= */
+
+.sanidad-lista {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.sanidad-item {
+    background: #f7f7f5;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.sanidad-item strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #222;
+}
+
+.sanidad-item span {
+    display: block;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #777;
+}
+
+@media (max-width: 700px) {
+
+    .sanidad-lista {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================
+   OFERTA
+   ========================= */
+
+.oferta-resumen-lista {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.oferta-resumen-item {
+    background: #f7f7f5;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+}
+
+.oferta-resumen-item strong {
+    display: block;
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.oferta-resumen-item span {
+    display: block;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #777;
+}
+
+.oferta-lista {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.establecimiento-lista {
+    background: #f7f7f5;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.establecimiento-lista strong {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.establecimiento-lista span {
+    display: block;
+    font-size: 11px;
+    color: #777;
+}
+
+@media (max-width: 700px) {
+
+    .oferta-resumen-lista {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* =========================
+   CRUCE · TABLA COMPARATIVA
+   ========================= */
+
+.cruce-tabla {
+    width: 100%;
+    margin: 22px 0 26px;
+    border: 1px solid #e5e8e1;
+    border-radius: 14px;
+    overflow-x: auto;
+    background: #ffffff;
+    font-size: 11px;
+    box-shadow: 0 4px 14px rgba(38, 48, 34, 0.045);
+    scrollbar-width: thin;
+    scrollbar-color: #c9cec3 #f4f5f1;
+}
+
+/* Estructura de columnas */
+
+.cruce-cabecera,
+.cruce-fila {
+    display: grid;
+    grid-template-columns:
+        minmax(160px, 2fr)
+        repeat(8, minmax(78px, 0.85fr));
+    align-items: stretch;
+    min-width: 900px;
+}
+
+/* Cabecera */
+
+.cruce-cabecera {
+    background: #f1f3ed;
+    color: #535d4d;
+    font-size: 9px;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    font-weight: 750;
+    border-bottom: 1px solid #dfe4d9;
+}
+
+.cruce-cabecera > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Celdas */
+
+.cruce-cabecera > div,
+.cruce-fila > div {
+    padding: 12px 9px;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+}
+
+/* Filas */
+
+.cruce-fila {
+    background: #ffffff;
+    border-bottom: 1px solid #edf0e9;
+    transition: background-color 0.18s ease;
+}
+
+.cruce-fila:last-child {
+    border-bottom: none;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #fafbf8;
+}
+
+.cruce-fila:hover {
+    background: #f0f4eb;
+}
+
+/* Nombre del barrio */
+
+.cruce-nombre {
+    display: flex;
+    align-items: center;
+    font-weight: 650;
+    color: #30392d;
+    line-height: 1.45;
+    border-right: 1px solid #edf0e9;
+}
+
+/* Valores */
+
+.cruce-dato {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #535b50;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.45;
+}
+
+/* Resumen compacto de la oferta */
+
+.oferta-resumen-compacto {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+.oferta-resumen-compacto .dato-card {
+    min-width: 0;
+    min-height: 0;
+    padding: 16px 12px;
+    border: 1px solid #e7eae3;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(38, 48, 34, 0.035);
+    text-align: center;
+}
+
+.oferta-resumen-compacto .dato-card strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #394a32;
+    font-size: 25px;
+    line-height: 1.15;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+.oferta-resumen-compacto .dato-card span {
+    display: block;
+    color: #687064;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 700px) {
+
+    .cruce-tabla {
+        margin: 18px 0 22px;
+        border-radius: 10px;
+        font-size: 10px;
+    }
+
+    .cruce-cabecera,
+    .cruce-fila {
+        min-width: 900px;
+    }
+
+    .cruce-cabecera > div,
+    .cruce-fila > div {
+        padding: 10px 8px;
+    }
+
+    .oferta-resumen-compacto {
+        gap: 8px;
+    }
+
+    .oferta-resumen-compacto .dato-card {
+        padding: 12px 7px;
+    }
+
+    .oferta-resumen-compacto .dato-card strong {
+        font-size: 22px;
+    }
+
+    .oferta-resumen-compacto .dato-card span {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .oferta-resumen-compacto {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .oferta-resumen-compacto .dato-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        text-align: left;
+    }
+
+    .oferta-resumen-compacto .dato-card strong {
+        margin-bottom: 0;
+        font-size: 23px;
+    }
+
+    .oferta-resumen-compacto .dato-card span {
+        max-width: 70%;
+        text-align: right;
+    }
+}
+
+
+/* =========================
+   OPORTUNIDADES
+   ========================= */
+
+.oportunidades-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.oportunidad-item {
+    background: #f7f7f5;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.oportunidad-item-cabecera {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.oportunidad-item-cabecera strong {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.oportunidad-item-cabecera span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.oportunidad-barrio {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.oportunidad-item p {
+    font-size: 12px;
+    line-height: 1.55;
+    color: #666;
+    margin: 0;
+}
+
+
+/* MATRIZ */
+
+.matriz-oportunidad {
+    margin-top: 18px;
+    border: 1px solid #e9e9e6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.matriz-cabecera,
+.matriz-fila {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1.4fr;
+}
+
+.matriz-cabecera {
+    background: #f0f0ed;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: #666;
+}
+
+.matriz-fila {
+    border-top: 1px solid #eeeeeb;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.matriz-cabecera > div,
+.matriz-fila > div {
+    padding: 13px 11px;
+}
+
+.matriz-fila > div:not(:first-child) {
+    color: #666;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .oportunidades-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .matriz-oportunidad {
+        overflow-x: auto;
+    }
+
+    .matriz-cabecera,
+    .matriz-fila {
+        min-width: 600px;
+    }
+
+}
+
+/* =========================================
+   OFERTA PRINCIPAL · PORTADA NOU BARRIS
+========================================= */
+
+.panel-oferta-principal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 20px;
+}
+
+
+.oferta-numero {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+.oferta-numero strong {
+    font-size: 42px;
+    line-height: 1;
+}
+
+
+.oferta-numero span {
+    font-size: 15px;
+}
+
+
+.boton-oferta {
+    border: none;
+    background: #d65a3a;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                background 0.2s ease;
+}
+
+
+.boton-oferta:hover {
+    background: #b9472c;
+    transform: translateY(-1px);
+}
+
+
+.panel-oferta-secundaria {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e5e5;
+    color: #777;
+    font-size: 13px;
+}
+
+/* =========================================
+   OFERTA · TARJETAS DE ORTOPEDIAS
+========================================= */
+
+.oferta-intro {
+    margin-bottom: 28px;
+}
+
+.oferta-intro h3 {
+    margin: 8px 0 6px;
+    font-size: 24px;
+}
+
+.oferta-intro p {
+    margin: 0;
+    color: #6f6f6f;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   TARJETAS DE ORTOPEDIAS
+========================================= */
+
+/* ETIQUETA */
+
+.ortopedia-etiqueta {
+    position: absolute;
+    left: 14px;
+    bottom: 14px;
+    background: rgba(255,255,255,.94);
+    color: var(--texto);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: 7px 10px;
+    border-radius: 8px;
+}
+
+
+/* =========================================
+   TARJETAS · ANÁLISIS DE ORTOPEDIAS
+========================================= */
+
+.ortopedias-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+    align-items: stretch;
+}
+
+
+/* TARJETA */
+
+.ortopedia-card {
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 14px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,.04);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.ortopedia-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 18px rgba(0,0,0,.08);
+}
+
+
+/* FOTO */
+
+.ortopedia-imagen {
+    width: 100%;
+    height: 128px;
+    overflow: hidden;
+    background: #e9e7e3;
+}
+
+.ortopedia-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform .3s ease;
+}
+
+.ortopedia-card:hover .ortopedia-imagen img {
+    transform: scale(1.035);
+}
+
+
+/* CONTENIDO */
+
+.ortopedia-contenido {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+
+/* CABECERA */
+
+.ortopedia-cabecera h3 {
+    margin: 0 0 5px;
+
+    font-size: 18px;
+    line-height: 1.2;
+
+    color: var(--texto);
+}
+
+.ortopedia-cabecera p {
+    margin: 0;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    color: var(--gris);
+}
+
+
+/* SEPARADOR */
+
+.ortopedia-separador {
+    height: 1px;
+    background: var(--gris-claro);
+    margin: 12px 0;
+}
+
+
+
+/* OFERTA CLAVE · LISTA */
+
+.oferta-lista {
+    margin: 0;
+    padding-left: 17px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+    row-gap: 5px;
+}
+
+.oferta-lista li {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    color: var(--texto);
+}
+
+.oferta-lista li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* DIFERENCIAL */
+
+.ortopedia-diferencial {
+    margin-top: 13px;
+
+    padding: 10px 12px;
+
+    background: #f7f6f3;
+
+    border-left: 2px solid var(--principal);
+    border-radius: 4px;
+}
+
+.ortopedia-diferencial span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .08em;
+
+    color: var(--principal);
+}
+
+.ortopedia-diferencial p {
+    margin: 0;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    color: var(--texto);
+}
+
+
+/* WEB */
+
+.ortopedia-web {
+    margin-top: auto;
+    padding-top: 13px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    color: var(--principal);
+
+    text-decoration: none;
+}
+
+.ortopedia-web:hover {
+    text-decoration: underline;
+}
+
+.ortopedia-web-no {
+    color: var(--gris);
+    cursor: default;
+}
+
+.ortopedia-web-no:hover {
+    text-decoration: none;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+
+    .ortopedias-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ortopedia-imagen {
+        height: 140px;
+    }
+
+    .oferta-lista {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================
+   GRÁFICOS COMPACTOS · PERFIL
+========================================= */
+
+
+.perfil-resumen-graficos {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+
+.grafico-bloque.compacto {
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.grafico-bloque.compacto .grafico-titulo {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    color: var(--texto);
+    margin-bottom: 5px;
+}
+
+.grafico-bloque.compacto .grafico-subtitulo {
+    font-size: 11px;
+    color: var(--gris);
+    margin: 0 0 14px;
+}
+
+/* Reduce el espacio vertical de cada fila */
+
+.ranking-grafico.compacto {
+    max-height: none;
+    overflow: visible;
+}
+
+/* Si tus rankings tienen filas */
+
+.ranking-grafico.compacto .ranking-item {
+    margin-bottom: 7px;
+}
+
+.ranking-grafico.compacto .ranking-barra {
+    height: 6px;
+}
+
+.territorio-edad-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin: 10px 0 14px;
+    font-size: 10px;
+    color: var(--gris);
+}
+
+.territorio-edad-leyenda span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.territorio-edad-leyenda i {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+}
+
+.edad-infancia {
+    background: var(--principal);
+}
+
+.edad-adulta {
+    background: #858b89;
+}
+
+.edad-mayores {
+    background: #c2c5c1;
+}
+
+.territorio-edad-barra {
+    display: flex;
+    width: 100%;
+    height: 8px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--gris-claro);
+}
+
+.territorio-edad-tramo {
+    display: block;
+    height: 100%;
+}
+
+.territorio-edad-valores {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.4;
+    color: var(--gris);
+    overflow-wrap: anywhere;
+}
+
+.territorio-anexos {
+    margin-top: 18px;
+}
+
+.territorio-detalle {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gris-claro);
+}
+
+.territorio-detalle summary {
+    color: var(--texto);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.territorio-nota {
+    margin: 8px 0;
+    color: var(--gris);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.territorio-tabla-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.territorio-tabla {
+    width: 100%;
+    min-width: 540px;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.territorio-tabla-educacion {
+    min-width: 740px;
+}
+
+.territorio-tabla th,
+.territorio-tabla td {
+    padding: 7px 8px;
+    border-bottom: 1px solid #e8e8e5;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.territorio-tabla thead th {
+    color: var(--gris);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.territorio-tabla th:first-child {
+    text-align: left;
+}
+
+.territorio-fuentes ul {
+    display: grid;
+    gap: 6px;
+    margin: 10px 0;
+    padding-left: 18px;
+    font-size: 12px;
+}
+
+.territorio-fuentes a {
+    color: var(--principal);
+}
+
+.territorio-barrio-indicadores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 700px) {
+    .territorio-barrio-indicadores {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 800px) {
+    .perfil-resumen-graficos {
+        grid-template-columns: 1fr;
+    }
+}
+
+.edad-resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.edad-resumen-barra {
+    display: flex;
+    width: 100%;
+    height: 16px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.edad-resumen-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.edad-resumen-tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 14px;
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 14px;
+}
+
+.edad-resumen-etiqueta {
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--texto);
+}
+
+.edad-resumen-tarjeta strong {
+    font-size: 1.65rem;
+    line-height: 1.2;
+    color: var(--texto);
+}
+
+.edad-resumen-rango,
+.edad-resumen-personas {
+    font-size: 0.78rem;
+    color: var(--gris);
+}
+
+@media (max-width: 600px) {
+    .edad-resumen-tarjetas {
+        grid-template-columns: 1fr;
+    }
+}
+
+.estructura-hogares {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.hogar-item {
+    display: grid;
+    gap: 7px;
+}
+
+.hogar-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.hogar-nombre {
+    font-size: 0.9rem;
+    color: var(--texto);
+}
+
+.hogar-porcentaje {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.hogar-barra-fondo {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--gris-claro);
+}
+
+.hogar-barra {
+    height: 100%;
+    border-radius: 20px;
+    background: var(--principal);
+}
+
+.hogar-cantidad {
+    font-size: 0.8rem;
+    color: var(--gris);
+}
+
+.estructura-hogares {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.hogar-item {
+    display: grid;
+    gap: 7px;
+}
+
+.hogar-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.hogar-nombre {
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.hogar-porcentaje {
+    color: var(--texto);
+    font-size: 1.05rem;
+}
+
+.hogar-barra-fondo {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    background: var(--gris-claro);
+    border-radius: 20px;
+}
+
+.hogar-barra {
+    height: 100%;
+    background: var(--principal);
+    border-radius: 20px;
+}
+
+.hogar-cantidad {
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.educacion-label {
+    display: block;
+    margin: 16px 0 6px;
+    font-size: 0.85rem;
+    color: var(--gris);
+}
+
+.educacion-selector {
+    width: 100%;
+    max-width: 360px;
+    padding: 10px 12px;
+    border: 1px solid var(--gris-claro);
+    border-radius: 10px;
+    background: var(--blanco);
+    color: var(--texto);
+    font: inherit;
+}
+
+.grafico-educacion {
+    display: grid;
+    gap: 18px;
+    margin: 24px 0;
+}
+
+.educacion-item {
+    display: grid;
+    gap: 8px;
+}
+
+.educacion-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.educacion-cabecera strong {
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.educacion-barra-fondo {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--gris-claro);
+}
+
+.educacion-barra {
+    height: 100%;
+    border-radius: 20px;
+    background: var(--principal);
+    transition: width 0.2s ease;
+}
+
+
+.educacion-resumen {
+    margin: 28px 0;
+    padding: 24px;
+    background: var(--blanco);
+    border: 1px solid var(--gris-claro);
+    border-radius: 16px;
+}
+
+.educacion-resumen-item {
+    display: grid;
+    gap: 8px;
+    margin: 22px 0;
+}
+
+.educacion-resumen-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.9rem;
+}
+
+.educacion-resumen-cabecera strong {
+    white-space: nowrap;
+    font-size: 1rem;
+}
+
+.educacion-resumen-fondo {
+    width: 100%;
+    height: 10px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--gris-claro);
+}
+
+.educacion-resumen-barra {
+    height: 100%;
+    border-radius: 20px;
+    background: var(--principal);
+}
+.educacion-resumen-compacto {
+    max-width: 480px;
+    margin: 16px 0;
+}
+
+.educacion-resumen-titulo {
+    margin-bottom: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: var(--texto);
+}
+
+.educacion-resumen-titulo span {
+    color: var(--gris);
+    font-weight: 500;
+}
+
+.educacion-dato {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    border-left: 2px solid var(--principal);
+    border-radius: 0 6px 6px 0;
+    background: rgba(214, 90, 58, 0.055);
+    font-size: 0.82rem;
+}
+
+.educacion-dato strong {
+    flex-shrink: 0;
+    color: var(--principal);
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.educacion-dato strong small {
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+
+/* =====================================
+   RED SANITARIA · DISEÑO COMPACTO
+===================================== */
+
+.red-sanitaria {
+    padding: 24px;
+    margin: 20px 0;
+    background: #f5f6f3;
+    border-radius: 16px;
+    color: #303d39;
+}
+
+.sanitaria-cabecera {
+    margin-bottom: 20px;
+}
+
+.sanitaria-etiqueta {
+    display: block;
+    margin-bottom: 8px;
+    color: #71836d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+.sanitaria-cabecera h2 {
+    margin: 0;
+    color: #303d39;
+    font-size: 25px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.sanitaria-resumen {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+.sanitaria-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 18px 10px;
+    border-radius: 12px;
+    background: #e5e9df;
+}
+
+.sanitaria-total strong {
+    color: #60765b;
+    font-size: 38px;
+    line-height: 1;
+}
+
+.sanitaria-total span {
+    color: #52634e;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sanitaria-listado {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.sanitaria-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    min-width: 0;
+    padding: 11px 12px;
+    border: 1px solid #e5e7e0;
+    border-radius: 9px;
+    background: #fff;
+}
+
+.sanitaria-punto {
+    flex-shrink: 0;
+    width: 7px;
+    height: 7px;
+    margin-top: 4px;
+    border-radius: 50%;
+    background: #829477;
+}
+
+.sanitaria-item > div,
+.sanitaria-cuap > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.sanitaria-item strong,
+.sanitaria-cuap strong {
+    color: #37443c;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.sanitaria-item span:not(.sanitaria-punto),
+.sanitaria-cuap > div > span {
+    color: #7a827a;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.sanitaria-cuap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 14px;
+    padding: 13px 16px;
+    border-left: 3px solid #829477;
+    border-radius: 8px;
+    background: #e9ece5;
+}
+
+.sanitaria-cuap-etiqueta {
+    flex-shrink: 0;
+    color: #64765e;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .8px;
+}
+
+@media (max-width: 650px) {
+    .red-sanitaria {
+        padding: 16px;
+    }
+
+    .sanitaria-resumen {
+        grid-template-columns: 70px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .sanitaria-total strong {
+        font-size: 30px;
+    }
+
+    .sanitaria-listado {
+        grid-template-columns: 1fr;
+    }
+
+    .sanitaria-item {
+        padding: 10px;
+    }
+
+    .sanitaria-cuap {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+}
+
+
+/* =========================================
+   DEMANDA POTENCIAL · COMPARATIVAS COMPACTAS
+   ========================================= */
+
+.comparativas-demanda {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+    align-items: stretch;
+}
+
+.comparativa-card {
+    min-width: 0;
+    padding: 17px;
+    background: #f5f6f3;
+    border: 1px solid #e7e9e2;
+    border-radius: 13px;
+}
+
+.comparativa-card h4 {
+    margin: 0 0 5px;
+    color: #303d39;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.comparativa-subtitulo {
+    margin: 0 0 15px;
+    color: #7a827a;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.comparativa-grupo + .comparativa-grupo {
+    margin-top: 14px;
+    padding-top: 11px;
+    border-top: 1px solid #e0e4dc;
+}
+
+.comparativa-sexo {
+    margin-bottom: 7px;
+    color: #52634e;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.comparativa-fila {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.comparativa-fila > span {
+    color: #626b63;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.comparativa-fila > strong {
+    color: #303d39;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.comparativa-nota {
+    margin: 8px 0 0;
+    color: #7a827a;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+/* Adaptación a pantallas pequeñas */
+
+@media (max-width: 700px) {
+    .comparativas-demanda {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .comparativa-card {
+        padding: 14px;
+    }
+}
+
+
+/* DEMANDA · DATOS DESTACADOS CON COLOR */
+
+.comparativa-card {
+    background: #ffffff;
+    border: 1px solid #e5eae6;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(40, 60, 48, 0.05);
+}
+
+.comparativa-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #263d36;
+}
+
+.comparativa-sexo {
+    display: inline-block;
+    padding: 5px 9px;
+    margin-bottom: 7px;
+    border-radius: 6px;
+    background: #e9f3ef;
+    color: #28745d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.comparativa-grupo + .comparativa-grupo .comparativa-sexo {
+    background: #f0edf9;
+    color: #7060a0;
+}
+
+.comparativa-fila {
+    padding: 8px 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: #f7f8f7;
+}
+
+.comparativa-fila > span {
+    color: #626b66;
+    font-size: 11px;
+}
+
+.comparativa-fila > strong {
+    color: #6d7771;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Nou Barris: cifra destacada */
+.comparativa-fila:first-of-type {
+    background: #eaf5ef;
+}
+
+.comparativa-fila:first-of-type > strong {
+    color: #197451;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+/* Separación entre mujeres y hombres */
+.comparativa-grupo + .comparativa-grupo {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid #e8ece8;
+}
+
+
+/* =========================================
+   01 · TERRITORIO Y CONTEXTO
+   ========================================= */
+
+#seccion-contenido .seccion-etiqueta {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #b6533b;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+#seccion-contenido h3 {
+    margin: 0 0 12px;
+    color: #263b43;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+#seccion-contenido .seccion-intro {
+    margin: 0 0 24px;
+    color: #65747a;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 620px;
+}
+
+/* Bloque de ámbito territorial */
+
+#seccion-contenido .panel-bloque {
+    position: relative;
+    margin-top: 8px;
+    padding: 22px 24px;
+    background: #f5f7f6;
+    border: 1px solid #e3e9e6;
+    border-left: 4px solid #b6533b;
+    border-radius: 12px;
+}
+
+#seccion-contenido .panel-bloque-titulo {
+    margin-bottom: 14px;
+    color: #b6533b;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+#seccion-contenido .panel-bloque p {
+    margin: 0 0 12px;
+    color: #43545a;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+#seccion-contenido .panel-bloque p:last-child {
+    margin-bottom: 0;
+}
+
+/* Ajustes para pantallas pequeñas */
+
+@media (max-width: 600px) {
+
+    #seccion-contenido h3 {
+        font-size: 21px;
+    }
+
+    #seccion-contenido .seccion-intro {
+        font-size: 13px;
+        margin-bottom: 18px;
+    }
+
+    #seccion-contenido .panel-bloque {
+        padding: 18px;
+    }
+
+    #seccion-contenido .panel-bloque p {
+        font-size: 13px;
+    }
+}
+
+/* ==========================================
+   TERRITORIO · LOS 13 BARRIOS
+   ========================================== */
+
+#seccion-contenido .territorio-barrios {
+    margin-top: 28px;
+    padding: 26px;
+    background: #f5f8f7;
+    border: 1px solid #e2ebe7;
+    border-radius: 20px;
+}
+
+/* Cabecera del bloque */
+
+#seccion-contenido .territorio-barrios .grafico-titulo {
+    margin: 0 0 10px;
+    color: #244b50;
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+    line-height: 1.35;
+}
+
+#seccion-contenido .territorio-barrios .grafico-subtitulo {
+    max-width: 650px;
+    margin: 0 0 22px;
+    color: #687b7d;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Cuadrícula de barrios */
+
+#seccion-contenido .lista-barrios-territorio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Tarjeta individual */
+
+#seccion-contenido .lista-barrios-territorio li {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    box-sizing: border-box;
+    padding: 11px 13px;
+    background: #ffffff;
+    border: 1px solid #e4ebe8;
+    border-radius: 11px;
+    color: #354e51;
+    font-size: 13px;
+    font-weight: 550;
+    line-height: 1.45;
+    transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease;
+}
+
+/* Punto decorativo */
+
+#seccion-contenido .lista-barrios-territorio li::before {
+    content: "";
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    margin-right: 10px;
+    background: #cb7158;
+    border-radius: 50%;
+}
+
+/* Efecto al pasar el cursor */
+
+#seccion-contenido .lista-barrios-territorio li:hover {
+    transform: translateY(-2px);
+    border-color: #b8d3cb;
+    box-shadow: 0 5px 14px rgba(37, 76, 72, 0.07);
+}
+
+/* Enfoque del estudio, si está dentro del mismo bloque */
+
+#seccion-contenido .territorio-barrios .metodologia-mini {
+    margin-top: 22px;
+    padding: 17px 19px;
+    background: #e7f1ed;
+    border: 1px solid #d7e7e0;
+    border-radius: 13px;
+}
+
+#seccion-contenido .territorio-barrios .metodologia-mini strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #28766b;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+}
+
+#seccion-contenido .territorio-barrios .metodologia-mini p {
+    margin: 0;
+    color: #47645f;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Tableta */
+
+@media (max-width: 760px) {
+    #seccion-contenido .lista-barrios-territorio {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #seccion-contenido .territorio-barrios {
+        padding: 20px;
+    }
+}
+
+/* Móvil */
+
+@media (max-width: 440px) {
+    #seccion-contenido .lista-barrios-territorio {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    #seccion-contenido .lista-barrios-territorio li {
+        min-height: 44px;
+        font-size: 13px;
+    }
+
+    #seccion-contenido .territorio-barrios {
+        padding: 16px;
+        border-radius: 15px;
+    }
+
+    #seccion-contenido .territorio-barrios .grafico-titulo {
+        font-size: 17px;
+    }
+}
+
+
+/* =====================================================
+   PERFIL DE LA POBLACIÓN · DISEÑO PARA PRESENTACIÓN
+   Aplicado al HTML actual, sin cambiar JavaScript
+   ===================================================== */
+
+/* Contenedor general del perfil */
+
+#seccion-contenido:has(.perfil-resumen-graficos) {
+    color: #293e45;
+}
+
+/* Cabecera */
+
+
+#seccion-contenido:has(.perfil-resumen-graficos) .seccion-etiqueta {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 0;
+    color: #b6533b;
+    background: transparent;
+    border-radius: 0;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+
+#seccion-contenido:has(.perfil-resumen-graficos) .seccion-intro {
+    max-width: 680px;
+    margin: 0 0 22px;
+    color: #687b80;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+/* Dos gráficos principales */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .perfil-resumen-graficos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 16px;
+    margin: 0 0 18px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .grafico-bloque.compacto {
+    min-width: 0;
+    margin: 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e4ebe8;
+    border-radius: 15px;
+    box-shadow: 0 4px 14px rgba(38, 65, 65, 0.045);
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .grafico-titulo {
+    margin: 0 0 7px;
+    color: #285b5a;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+    line-height: 1.5;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .grafico-subtitulo {
+    margin: 0 0 17px;
+    color: #7a898d;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Aprovechar el espacio interior de los gráficos */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .ranking-grafico.compacto {
+    width: 100%;
+    min-width: 0;
+    margin-top: 10px;
+}
+
+/* Leyenda de edades */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-edad-leyenda {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 16px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-edad-leyenda span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #596d71;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-edad-leyenda i {
+    display: inline-block;
+    flex: 0 0 9px;
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+}
+
+/* Indicadores educativos */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-resumen-compacto {
+    display: grid;
+    grid-template-columns: minmax(140px, 1.15fr) repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 18px;
+    margin: 0 0 16px;
+    padding: 20px 22px;
+    background: #f8f2ee;
+    border: 1px solid #eee2da;
+    border-radius: 15px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-resumen-titulo {
+    color: #9d5844;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    line-height: 1.6;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-resumen-titulo span {
+    display: block;
+    margin-top: 3px;
+    color: #ad8b7c;
+    font-size: 10px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato {
+    min-width: 0;
+    padding-left: 16px;
+    border-left: 1px solid #e5d4ca;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato span {
+    display: block;
+    margin-bottom: 7px;
+    color: #746d68;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato strong {
+    color: #9d5844;
+    font-size: 27px;
+    font-weight: 750;
+    line-height: 1.1;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato small {
+    font-size: 14px;
+}
+
+/* Lectura metodológica */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .metodologia-mini {
+    margin: 12px 0 18px;
+    padding: 13px 17px;
+    background: #f1f6f4;
+    border: 1px solid #e2ece7;
+    border-radius: 11px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .metodologia-mini strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #34776d;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.9px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .metodologia-mini p {
+    margin: 0;
+    color: #637875;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+/* Bloques desplegables: dos columnas */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-anexos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 14px;
+    margin-top: 0;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle {
+    min-width: 0;
+    margin: 0;
+    padding: 17px 19px;
+    background: #fff;
+    border: 1px solid #e3eae7;
+    border-radius: 13px;
+    box-shadow: 0 3px 10px rgba(38, 65, 65, 0.025);
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle > summary {
+    color: #344f53;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle > summary::marker {
+    color: #b7654d;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle[open] > summary {
+    margin-bottom: 14px;
+    padding-bottom: 11px;
+    border-bottom: 1px solid #edf1ef;
+}
+
+/* Notas de los apartados */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-nota {
+    color: #77868a;
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+/* Estructura de los hogares */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .estructura-hogares {
+    display: grid;
+    gap: 13px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-item {
+    min-width: 0;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-nombre {
+    color: #4e6266;
+    font-size: 11px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-porcentaje {
+    color: #32756a;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-barra-fondo {
+    height: 6px;
+    overflow: hidden;
+    background: #edf1ef;
+    border-radius: 20px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-barra {
+    height: 100%;
+    background: #6b9d91;
+    border-radius: 20px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .hogar-cantidad {
+    display: block;
+    margin-top: 4px;
+    color: #899598;
+    font-size: 10px;
+}
+
+/* Selector educativo */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-label {
+    display: block;
+    margin: 12px 0 6px;
+    color: #596d71;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .educacion-selector {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px;
+    color: #344f53;
+    background: #f7f9f8;
+    border: 1px solid #dce6e1;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 12px;
+}
+
+/* Tabla de renta */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla th,
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla td {
+    padding: 9px 7px;
+    border-bottom: 1px solid #edf0ef;
+    text-align: left;
+    line-height: 1.45;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla thead th {
+    color: #39746d;
+    font-weight: 750;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla tbody th {
+    color: #44575b;
+    font-weight: 600;
+}
+
+/* Fuentes: ocupan las dos columnas */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes {
+    grid-column: 1 / -1;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes ul {
+    padding-left: 18px;
+    color: #65777a;
+    font-size: 11px;
+    line-height: 1.9;
+    overflow-wrap: anywhere;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes a {
+    color: #39746d;
+    text-underline-offset: 3px;
+}
+
+/* Tableta */
+
+@media (max-width: 850px) {
+    #seccion-contenido:has(.perfil-resumen-graficos) .perfil-resumen-graficos {
+        grid-template-columns: 1fr;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .territorio-anexos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Móvil */
+
+@media (max-width: 520px) {
+    #seccion-contenido:has(.perfil-resumen-graficos) .grafico-bloque.compacto {
+        padding: 15px;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .educacion-resumen-compacto {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 8px;
+        padding: 15px;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .educacion-resumen-titulo {
+        grid-column: 1 / -1;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato {
+        padding-left: 10px;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .educacion-dato strong {
+        font-size: 23px;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle {
+        padding: 14px;
+    }
+}
+
+
+
+
+/* ==========================================
+   PERFIL DE POBLACIÓN · DATOS SIEMPRE VISIBLES
+   ========================================== */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-anexos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle {
+    min-width: 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e1e9e5;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(38, 65, 65, 0.04);
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle-titulo {
+    margin: 0 0 14px;
+    padding-bottom: 11px;
+    color: #2d5958;
+    border-bottom: 1px solid #e8efec;
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.5;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-detalle .territorio-nota {
+    margin: 0 0 12px;
+    color: #77868a;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+/* Los hogares se mantienen compactos */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .estructura-hogares {
+    display: grid;
+    gap: 13px;
+}
+
+/* La consulta educativa y su gráfico siempre visibles */
+
+#seccion-contenido:has(.perfil-resumen-graficos) #grafico-educacion {
+    display: block;
+    margin-top: 15px;
+}
+
+/* Tabla de renta legible */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla th,
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-tabla td {
+    padding: 9px 6px;
+    border-bottom: 1px solid #e9efec;
+    font-size: 11px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Las fuentes ocupan todo el ancho */
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes {
+    grid-column: 1 / -1;
+    background: #f5f8f6;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes ul {
+    padding-left: 18px;
+    overflow-wrap: anywhere;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+#seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes li {
+    margin-bottom: 5px;
+}
+
+/* En pantallas pequeñas */
+
+@media (max-width: 760px) {
+    #seccion-contenido:has(.perfil-resumen-graficos) .territorio-anexos {
+        grid-template-columns: 1fr;
+    }
+
+    #seccion-contenido:has(.perfil-resumen-graficos) .territorio-fuentes {
+        grid-column: auto;
+    }
+}
+
+
+/* =========================================
+   PERFIL · POBLACIÓN POR BARRIO
+   ========================================= */
+
+#seccion-contenido:has(.poblacion-circular) .poblacion-circular {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.8fr) minmax(0, 1.4fr);
+    align-items: center;
+    gap: 22px;
+    padding: 12px 0;
+}
+
+#seccion-contenido .poblacion-donut {
+    width: min(100%, 190px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0 auto;
+}
+
+#seccion-contenido .poblacion-donut-centro {
+    width: 58%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8px;
+}
+
+#seccion-contenido .poblacion-donut-centro strong {
+    color: #263746;
+    font-size: clamp(15px, 1.5vw, 21px);
+    line-height: 1.2;
+}
+
+#seccion-contenido .poblacion-donut-centro span {
+    color: #697783;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+#seccion-contenido .poblacion-leyenda {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    min-width: 0;
+}
+
+#seccion-contenido .poblacion-leyenda-item {
+    display: grid;
+    grid-template-columns: 9px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+    font-size: 11px;
+    line-height: 1.25;
+}
+
+#seccion-contenido .poblacion-color {
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+}
+
+#seccion-contenido .poblacion-barrio {
+    color: #42515e;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#seccion-contenido .poblacion-cifra {
+    color: #263746;
+    font-size: 11px;
+    font-weight: 650;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 700px) {
+    #seccion-contenido:has(.poblacion-circular) .poblacion-circular {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    #seccion-contenido .poblacion-donut {
+        width: 165px;
+    }
+
+    #seccion-contenido .poblacion-leyenda {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px 12px;
+    }
+
+    #seccion-contenido .poblacion-leyenda-item {
+        grid-template-columns: 8px minmax(0, 1fr);
+        align-items: start;
+        font-size: 10px;
+    }
+
+    #seccion-contenido .poblacion-cifra {
+        grid-column: 2;
+        font-size: 10px;
+    }
+}
+
+
+
+/* Nivel educativo: tarjeta compacta y alineada */
+
+#seccion-contenido .educacion-resumen-compacto {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 12px 0 0;
+    padding: 16px 18px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#seccion-contenido .educacion-resumen-titulo {
+    margin: 0 0 12px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+#seccion-contenido .educacion-dato {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+#seccion-contenido .educacion-dato > span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#seccion-contenido .educacion-dato > strong {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+
+
+/* ESTRUCTURA DE EDADES · COLORES COHERENTES */
+
+#seccion-contenido .territorio-edad-leyenda .edad-infancia {
+    background-color: #78A6C8;
+}
+
+#seccion-contenido .territorio-edad-leyenda .edad-adulta {
+    background-color: #5A9A91;
+}
+
+#seccion-contenido .territorio-edad-leyenda .edad-mayores {
+    background-color: #E0A458;
+}
+
+/* Barras finas y fondo neutro */
+
+#seccion-contenido .ranking-grafico.compacto .ranking-barra {
+    height: 7px;
+    background: #EDF1F4;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#seccion-contenido .ranking-grafico.compacto .ranking-barra-relleno {
+    height: 100%;
+    border-radius: 6px;
+}
+
+/* Colores de las barras de edad */
+
+#seccion-contenido .ranking-grafico.compacto .edad-infancia {
+    background-color: #78A6C8;
+}
+
+#seccion-contenido .ranking-grafico.compacto .edad-adulta {
+    background-color: #5A9A91;
+}
+
+#seccion-contenido .ranking-grafico.compacto .edad-mayores {
+    background-color: #E0A458;
+}
+
+
+/* =========================================
+   PERFIL · ESTRUCTURA DE EDADES
+   ========================================= */
+
+#seccion-contenido .edad-resumen {
+    width: 100%;
+    min-width: 0;
+    margin-top: 16px;
+}
+
+#seccion-contenido .edad-resumen-barra {
+    display: flex;
+    width: 100%;
+    height: 13px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #edf1f4;
+    margin-bottom: 18px;
+}
+
+#seccion-contenido .edad-resumen-barra .territorio-edad-tramo {
+    display: block;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+#seccion-contenido .edad-resumen-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#seccion-contenido .edad-resumen-tarjeta {
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 13px 12px;
+    background: #f7f9fa;
+    border: 1px solid #e8edf0;
+    border-radius: 10px;
+}
+
+#seccion-contenido .edad-resumen-cabecera {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    min-height: 34px;
+}
+
+#seccion-contenido .edad-resumen-indicador {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    margin-top: 4px;
+    border-radius: 3px;
+}
+
+#seccion-contenido .edad-resumen-etiqueta {
+    color: #465663;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+#seccion-contenido .edad-resumen-porcentaje {
+    display: block;
+    margin: 7px 0;
+    color: #263746;
+    font-size: clamp(20px, 2vw, 27px);
+    line-height: 1.15;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+#seccion-contenido .edad-resumen-rango,
+#seccion-contenido .edad-resumen-personas {
+    display: block;
+    color: #687784;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+#seccion-contenido .edad-resumen-personas {
+    margin-top: 3px;
+    color: #465663;
+    font-weight: 600;
+}
+
+@media (max-width: 700px) {
+    #seccion-contenido .edad-resumen-tarjetas {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    #seccion-contenido .edad-resumen-tarjeta {
+        padding: 12px 14px;
+    }
+
+    #seccion-contenido .edad-resumen-cabecera {
+        min-height: auto;
+    }
+
+    #seccion-contenido .edad-resumen-porcentaje {
+        font-size: 22px;
+    }
+}
+
+
+/* =========================================
+   PERFIL · ESTRUCTURA DE LOS HOGARES
+   ========================================= */
+
+#seccion-contenido .estructura-hogares {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    margin: 16px 0;
+}
+
+#seccion-contenido .hogar-item {
+    min-width: 0;
+    padding: 13px 14px;
+    background: #f8fafb;
+    border: 1px solid #e8edf0;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+#seccion-contenido .hogar-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#seccion-contenido .hogar-nombre {
+    color: #465663;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+#seccion-contenido .hogar-porcentaje {
+    flex-shrink: 0;
+    color: #263746;
+    font-size: 19px;
+    font-weight: 750;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+#seccion-contenido .hogar-barra-fondo {
+    width: 100%;
+    height: 6px;
+    overflow: hidden;
+    background: #e8eef1;
+    border-radius: 10px;
+}
+
+#seccion-contenido .hogar-barra {
+    height: 100%;
+    background: #5a9a91;
+    border-radius: inherit;
+}
+
+#seccion-contenido .hogar-cantidad {
+    display: block;
+    margin-top: 8px;
+    color: #788692;
+    font-size: 11px;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Conclusión destacada, sin competir con los datos */
+
+#seccion-contenido .metodologia-mini {
+    padding: 13px 15px;
+    margin-top: 14px;
+    border-left: 3px solid #5a9a91;
+    border-radius: 0 8px 8px 0;
+    background: #f2f7f6;
+    box-sizing: border-box;
+}
+
+#seccion-contenido .metodologia-mini strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #426e68;
+    font-size: 10px;
+    letter-spacing: 0.07em;
+}
+
+#seccion-contenido .metodologia-mini p {
+    margin: 0;
+    color: #536370;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+#seccion-contenido .estructura-hogares + .metodologia-mini + .territorio-nota {
+    margin-top: 10px;
+    color: #788692;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    #seccion-contenido .estructura-hogares {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+    }
+}
+
+
+
+/* NIVEL EDUCATIVO · ESTILO NEUTRO */
+
+#seccion-contenido .educacion-lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+}
+
+#seccion-contenido .educacion-item {
+    padding: 12px 2px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #e8edf0;
+    border-radius: 0;
+}
+
+#seccion-contenido .educacion-cabecera {
+    margin-bottom: 8px;
+}
+
+#seccion-contenido .educacion-nombre {
+    color: #465663;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#seccion-contenido .educacion-nombre i {
+    display: none;
+}
+
+#seccion-contenido .educacion-valor {
+    color: #344653;
+    font-size: 16px;
+    font-weight: 650;
+}
+
+#seccion-contenido .educacion-barra-fondo {
+    height: 5px;
+    background: #edf1f4;
+    border-radius: 5px;
+}
+
+#seccion-contenido .educacion-barra {
+    background: #7895a5 !important;
+    border-radius: 5px;
+}
+
+
+/* RENTA POR BARRIO · GRÁFICO DE RANGOS */
+
+#seccion-contenido .renta-grafico {
+    margin-top: 22px;
+}
+
+#seccion-contenido .renta-eje {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5eaed;
+    color: #84909a;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+#seccion-contenido .renta-fila {
+    margin-bottom: 19px;
+}
+
+#seccion-contenido .renta-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+#seccion-contenido .renta-barrio {
+    color: #344653;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+#seccion-contenido .renta-secciones {
+    flex-shrink: 0;
+    color: #89949c;
+    font-size: 10px;
+}
+
+#seccion-contenido .renta-pista {
+    position: relative;
+    height: 7px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #edf1f3;
+}
+
+#seccion-contenido .renta-intervalo {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 8px;
+    background: #7895a5;
+}
+
+#seccion-contenido .renta-valores {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 5px;
+    color: #697783;
+    font-size: 10px;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+    #seccion-contenido .renta-fila {
+        margin-bottom: 17px;
+    }
+
+    #seccion-contenido .renta-barrio {
+        font-size: 11px;
+    }
+
+    #seccion-contenido .renta-eje,
+    #seccion-contenido .renta-valores {
+        font-size: 9px;
+    }
+}
+
+
+/* RENTA · VERSIÓN COMPACTA */
+
+#seccion-contenido .renta-grafico {
+    margin-top: 12px;
+}
+
+#seccion-contenido .renta-eje {
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    font-size: 9px;
+}
+
+#seccion-contenido .renta-fila {
+    display: grid;
+    grid-template-columns: minmax(115px, 1.1fr) minmax(70px, 1fr) minmax(125px, 1.2fr);
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+    padding: 8px 0;
+    border-bottom: 1px solid #edf0f2;
+}
+
+#seccion-contenido .renta-cabecera {
+    display: block;
+    margin: 0;
+    min-width: 0;
+}
+
+#seccion-contenido .renta-barrio {
+    display: block;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+#seccion-contenido .renta-secciones {
+    display: block;
+    margin-top: 2px;
+    font-size: 9px;
+}
+
+#seccion-contenido .renta-pista {
+    height: 5px;
+}
+
+#seccion-contenido .renta-valores {
+    margin: 0;
+    gap: 5px;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    #seccion-contenido .renta-fila {
+        grid-template-columns: minmax(90px, 1fr) minmax(45px, .6fr);
+        gap: 8px;
+    }
+
+    #seccion-contenido .renta-pista {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    #seccion-contenido .renta-valores {
+        grid-column: 2;
+        grid-row: 1;
+        justify-content: flex-end;
+        font-size: 8px;
+    }
+}
+
+
+/* RENTA · GRÁFICO DE BARRAS VERTICALES */
+
+#seccion-contenido .renta-barras-verticales {
+    display: grid;
+    grid-template-columns: repeat(13, minmax(0, 1fr));
+    gap: 8px;
+    align-items: end;
+    margin-top: 18px;
+    padding-bottom: 4px;
+}
+
+#seccion-contenido .renta-columna {
+    display: grid;
+    grid-template-rows: auto 150px auto;
+    min-width: 0;
+    text-align: center;
+    gap: 7px;
+}
+
+#seccion-contenido .renta-importe {
+    color: #526575;
+    font-size: 9px;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+#seccion-contenido .renta-columna-area {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    height: 150px;
+    border-bottom: 1px solid #dfe6e9;
+    background: repeating-linear-gradient(
+        to top,
+        transparent 0,
+        transparent 49px,
+        #edf1f3 50px
+    );
+}
+
+#seccion-contenido .renta-columna-barra {
+    width: min(70%, 24px);
+    min-height: 3px;
+    background: #7895a5;
+    border-radius: 4px 4px 0 0;
+}
+
+#seccion-contenido .renta-columna-nombre {
+    color: #465663;
+    font-size: 9px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+    #seccion-contenido .renta-barras-verticales {
+        grid-template-columns: repeat(13, 70px);
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+}
+
+
+/* CORREGIR ALINEACIÓN DEL GRÁFICO DE RENTA */
+
+#seccion-contenido .renta-columna {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    gap: 6px;
+}
+
+#seccion-contenido .renta-importe {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 24px;
+    white-space: nowrap;
+    font-size: 9px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+
+#seccion-contenido .renta-columna-area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 150px;
+    min-height: 150px;
+    box-sizing: border-box;
+}
+
+#seccion-contenido .renta-columna-barra {
+    flex-shrink: 0;
+}
+
+#seccion-contenido .renta-columna-nombre {
+    display: block;
+    min-height: 36px;
+    text-align: center;
+    overflow-wrap: anywhere;
+    line-height: 1.2;
+}
+
+
+/* RENTA · BARRAS HORIZONTALES COMPACTAS */
+
+#seccion-contenido .renta-horizontal {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px;
+}
+
+#seccion-contenido .renta-horizontal-fila {
+    display: grid;
+    grid-template-columns: minmax(130px, 1.1fr) minmax(70px, 1fr) 78px;
+    align-items: center;
+    gap: 12px;
+    min-height: 32px;
+    border-bottom: 1px solid #edf0f2;
+}
+
+#seccion-contenido .renta-horizontal-nombre {
+    color: #465663;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+#seccion-contenido .renta-horizontal-pista {
+    height: 6px;
+    overflow: hidden;
+    background: #edf1f3;
+    border-radius: 6px;
+}
+
+#seccion-contenido .renta-horizontal-barra {
+    height: 100%;
+    background: #7895a5;
+    border-radius: 6px;
+}
+
+#seccion-contenido .renta-horizontal-valor {
+    color: #344653;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+    #seccion-contenido .renta-horizontal-fila {
+        grid-template-columns: minmax(100px, 1fr) minmax(45px, .7fr) 72px;
+        gap: 7px;
+        min-height: 35px;
+    }
+
+    #seccion-contenido .renta-horizontal-nombre,
+    #seccion-contenido .renta-horizontal-valor {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================
+   CRUCE · RESUMEN VISUAL
+   ========================= */
+
+.cruce-resumen {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 22px 0 30px;
+}
+
+.cruce-indicador {
+    min-width: 0;
+    padding: 18px 16px;
+    background: #f6f7f3;
+    border: 1px solid #e3e7de;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cruce-indicador-etiqueta {
+    color: #697263;
+    font-size: 10px;
+    line-height: 1.4;
+    font-weight: 750;
+    letter-spacing: .45px;
+}
+
+.cruce-indicador strong {
+    color: #354b30;
+    font-size: clamp(24px, 2.5vw, 32px);
+    line-height: 1.1;
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+}
+
+.cruce-indicador-detalle {
+    color: #73786e;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* Bloques */
+
+.cruce-bloque {
+    margin: 28px 0;
+}
+
+.cruce-bloque-cabecera {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.cruce-bloque-cabecera h4 {
+    margin: 5px 0 0;
+    color: #30372f;
+    font-size: 18px;
+    line-height: 1.35;
+}
+
+.cruce-kicker {
+    color: #6a795f;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: .8px;
+}
+
+.cruce-unidad {
+    color: #777d72;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.cruce-ayuda {
+    margin: -7px 0 12px;
+    color: #74796f;
+    font-size: 12px;
+}
+
+/* Ranking de población mayor */
+
+.cruce-ranking {
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e6e9e2;
+    border-radius: 12px;
+}
+
+.cruce-ranking-fila {
+    display: grid;
+    grid-template-columns: minmax(105px, 150px) minmax(60px, 1fr) 58px;
+    align-items: center;
+    gap: 14px;
+}
+
+.cruce-ranking-nombre {
+    color: #41473d;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.cruce-ranking-pista {
+    height: 11px;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #edf0e9;
+}
+
+.cruce-ranking-barra {
+    height: 100%;
+    border-radius: 3px;
+    background: #708b63;
+}
+
+.cruce-ranking-valor {
+    color: #354b30;
+    text-align: right;
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Tabla comparativa */
+
+.cruce-tabla {
+    width: 100%;
+    margin: 0;
+    overflow-x: auto;
+    border: 1px solid #e1e5dc;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 11px;
+}
+
+.cruce-cabecera,
+.cruce-fila {
+    display: grid;
+    grid-template-columns:
+        minmax(145px, 1.8fr)
+        repeat(8, minmax(82px, 1fr));
+    min-width: 900px;
+    align-items: stretch;
+}
+
+.cruce-cabecera {
+    background: #edf1e8;
+    color: #485641;
+    font-size: 9px;
+    line-height: 1.45;
+    font-weight: 750;
+    letter-spacing: .25px;
+}
+
+.cruce-cabecera > div,
+.cruce-fila > div {
+    box-sizing: border-box;
+    padding: 12px 9px;
+    overflow-wrap: anywhere;
+}
+
+.cruce-cabecera > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.cruce-fila {
+    border-top: 1px solid #e9ece5;
+    background: #fff;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #f8f9f6;
+}
+
+.cruce-fila:hover {
+    background: #eef3e9;
+}
+
+.cruce-nombre {
+    color: #303a2d;
+    font-weight: 700;
+}
+
+.cruce-dato {
+    color: #4f574a;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Adaptación */
+
+@media (max-width: 760px) {
+    .cruce-resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .cruce-indicador {
+        padding: 14px 12px;
+    }
+
+    .cruce-bloque-cabecera {
+        align-items: start;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .cruce-ranking {
+        padding: 14px 10px;
+        gap: 14px;
+    }
+
+    .cruce-ranking-fila {
+        grid-template-columns: 95px minmax(35px, 1fr) 48px;
+        gap: 8px;
+    }
+
+    .cruce-ranking-nombre,
+    .cruce-ranking-valor {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================
+   CRUCE · TABLA COMPARATIVA
+   ========================= */
+
+.cruce-tabla {
+    width: 100%;
+    margin: 22px 0;
+    overflow-x: auto;
+    border: 1px solid #dfe5da;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.cruce-cabecera,
+.cruce-fila {
+    display: grid;
+    grid-template-columns:
+        minmax(135px, 1.5fr)
+        repeat(8, minmax(100px, 1fr));
+    min-width: 960px;
+}
+
+.cruce-cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #344b35;
+    color: #ffffff;
+}
+
+.cruce-cabecera > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    padding: 10px 8px;
+    border-right: 1px solid rgba(255, 255, 255, 0.16);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.cruce-cabecera > div:first-child {
+    justify-content: flex-start;
+    padding-left: 14px;
+    background: #293e2b;
+    text-align: left;
+}
+
+/* Filas */
+
+.cruce-fila {
+    min-height: 48px;
+    border-bottom: 1px solid #e9ede5;
+    transition: background 0.15s ease;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #f6f8f3;
+}
+
+.cruce-fila:nth-child(odd) {
+    background: #ffffff;
+}
+
+.cruce-fila:hover {
+    background: #edf3e8;
+}
+
+/* Celdas */
+
+.cruce-fila > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 10px 8px;
+    border-right: 1px solid #e8ece4;
+    color: #41483e;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Nombre del barrio */
+
+.cruce-fila .cruce-nombre {
+    justify-content: flex-start;
+    padding-left: 14px;
+    background: #f0f3eb;
+    color: #344b35;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* Indicadores demográficos */
+
+.cruce-fila .cruce-dato:nth-child(2) {
+    background: rgba(145, 167, 134, 0.13);
+    font-weight: 600;
+}
+
+.cruce-fila .cruce-dato:nth-child(3) {
+    background: rgba(82, 111, 72, 0.12);
+    color: #36552f;
+    font-weight: 700;
+}
+
+.cruce-fila .cruce-dato:nth-child(4) {
+    background: rgba(205, 174, 116, 0.17);
+    color: #765b2d;
+    font-weight: 600;
+}
+
+/* Indicadores de oferta */
+
+.cruce-fila .cruce-dato:nth-child(n+5) {
+    font-weight: 600;
+}
+
+.cruce-fila .cruce-dato:last-child,
+.cruce-fila .cruce-dato:nth-last-child(2) {
+    color: #596b83;
+}
+
+/* Última fila */
+
+.cruce-fila:last-child {
+    border-bottom: none;
+}
+
+/* Pantallas estrechas */
+
+@media (max-width: 760px) {
+    .cruce-tabla {
+        border-radius: 9px;
+    }
+
+    .cruce-cabecera > div {
+        min-height: 58px;
+        font-size: 9px;
+    }
+
+    .cruce-fila > div {
+        padding: 9px 7px;
+        font-size: 11px;
+    }
+}
+
+
+/* Verdes más suaves en toda la tabla */
+
+.cruce-cabecera {
+    background: #52664f;
+}
+
+.cruce-cabecera > div:first-child {
+    background: #465943;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #fafbf8;
+}
+
+.cruce-fila:nth-child(odd) {
+    background: #ffffff;
+}
+
+.cruce-fila .cruce-nombre {
+    background: #f5f7f2;
+    color: #40513c;
+}
+
+.cruce-fila .cruce-dato:nth-child(2) {
+    background: #f3f6f0;
+}
+
+.cruce-fila .cruce-dato:nth-child(3) {
+    background: #edf2e9;
+    color: #40583a;
+}
+
+
+/* Verdes más suaves en toda la tabla */
+
+.cruce-cabecera {
+    background: #52664f;
+}
+
+.cruce-cabecera > div:first-child {
+    background: #465943;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #fafbf8;
+}
+
+.cruce-fila:nth-child(odd) {
+    background: #ffffff;
+}
+
+.cruce-fila .cruce-nombre {
+    background: #f5f7f2;
+    color: #40513c;
+}
+
+.cruce-fila .cruce-dato:nth-child(2) {
+    background: #f3f6f0;
+}
+
+.cruce-fila .cruce-dato:nth-child(3) {
+    background: #edf2e9;
+    color: #40583a;
+}
+
+
+/* Verdes más suaves en toda la tabla */
+
+.cruce-cabecera {
+    background: #52664f;
+}
+
+.cruce-cabecera > div:first-child {
+    background: #465943;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #fafbf8;
+}
+
+.cruce-fila:nth-child(odd) {
+    background: #ffffff;
+}
+
+.cruce-fila .cruce-nombre {
+    background: #f5f7f2;
+    color: #40513c;
+}
+
+.cruce-fila .cruce-dato:nth-child(2) {
+    background: #f3f6f0;
+}
+
+.cruce-fila .cruce-dato:nth-child(3) {
+    background: #edf2e9;
+    color: #40583a;
+}
+
+/* Verdes más suaves en toda la tabla */
+
+.cruce-cabecera {
+    background: #52664f;
+}
+
+.cruce-cabecera > div:first-child {
+    background: #465943;
+}
+
+.cruce-fila:nth-child(even) {
+    background: #fafbf8;
+}
+
+.cruce-fila:nth-child(odd) {
+    background: #ffffff;
+}
+
+.cruce-fila .cruce-nombre {
+    background: #f5f7f2;
+    color: #40513c;
+}
+
+.cruce-fila .cruce-dato:nth-child(2) {
+    background: #f3f6f0;
+}
+
+.cruce-fila .cruce-dato:nth-child(3) {
+    background: #edf2e9;
+    color: #40583a;
+}
+
+/* Destacar barrios con ortopedia */
+
+.cruce-fila:has(.cruce-dato:nth-child(5)) .cruce-nombre {
+    background: #e8eee2;
+}
+
+/* Celda de ortopedias: resaltar cuando el valor es mayor que cero */
+.cruce-fila .cruce-dato:nth-child(5) {
+    background: #f4f6f1;
+    color: #5c6657;
+}
+
+.cruce-fila .cruce-dato:nth-child(5).tiene-ortopedia {
+    background: #dfe9d7;
+    color: #31492c;
+    font-weight: 800;
+    box-shadow: inset 0 0 0 1px #cbd9c1;
+}
+
+
+.cruce-fila .cruce-dato:nth-child(5).tiene-ortopedia {
+    background: #dfe9d7;
+    color: #31492c;
+    font-weight: 800;
+    box-shadow: inset 0 0 0 1px #cbd9c1;
+}
+
+/* =========================================
+   OPORTUNIDADES · NOU BARRIS
+   ========================================= */
+
+.oportunidad-area-resumen {
+    margin: 22px 0;
+    padding: 24px 28px;
+    border-radius: 16px;
+    background: #eef4ff;
+    border: 1px solid #d9e5fb;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.oportunidad-area-etiqueta {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: #526b91;
+}
+
+.oportunidad-area-resumen > strong {
+    font-size: 38px;
+    line-height: 1.1;
+    color: #244b83;
+}
+
+.oportunidad-area-resumen > span:not(.oportunidad-area-etiqueta) {
+    font-size: 14px;
+    color: #40516a;
+}
+
+.oportunidad-area-resumen p {
+    margin: 5px 0 0;
+    color: #40516a;
+    font-size: 13px;
+}
+
+/* BLOQUES */
+
+.panel-bloque {
+    margin: 26px 0;
+}
+
+.panel-bloque-titulo {
+    margin-bottom: 14px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #374151;
+}
+
+.oportunidad-nota {
+    margin: 0 0 16px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #6b7280;
+}
+
+/* TARJETAS DE LOS SEIS BARRIOS */
+
+.oportunidad-zona-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.oportunidad-zona-card {
+    padding: 17px;
+    background: #ffffff;
+    border: 1px solid #e1e6ed;
+    border-radius: 13px;
+    box-shadow: 0 3px 10px rgba(30, 50, 80, 0.04);
+}
+
+.oportunidad-zona-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.oportunidad-zona-cabecera h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 750;
+    color: #243247;
+}
+
+.oportunidad-zona-cabecera span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #526b91;
+    white-space: nowrap;
+}
+
+.oportunidad-zona-indicadores {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 14px;
+}
+
+.oportunidad-zona-indicadores > div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.oportunidad-zona-indicadores span {
+    font-size: 10px;
+    line-height: 1.4;
+    color: #6b7280;
+}
+
+.oportunidad-zona-indicadores strong {
+    font-size: 19px;
+    line-height: 1.1;
+    color: #263b59;
+}
+
+/* OTROS NICHOS */
+
+.oportunidad-nicho {
+    display: grid;
+    grid-template-columns: 115px minmax(0, 1fr);
+    align-items: center;
+    gap: 18px;
+    padding: 18px;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    background: #ffffff;
+}
+
+.oportunidad-nicho > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.oportunidad-nicho-numero {
+    font-size: 25px;
+    font-weight: 800;
+    color: #28766c;
+}
+
+.oportunidad-nicho strong {
+    font-size: 13px;
+    color: #374151;
+}
+
+.oportunidad-nicho p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #596579;
+}
+
+/* PROPUESTA DE MERCADO */
+
+.oportunidad-propuesta {
+    margin: 28px 0;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #f0d6ad;
+    border-left: 5px solid #e49a35;
+    background: #fffaf2;
+}
+
+.oportunidad-propuesta h4 {
+    margin: 12px 0;
+    font-size: 19px;
+    line-height: 1.4;
+    color: #67451b;
+}
+
+.oportunidad-propuesta > p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #65594a;
+}
+
+.oportunidad-servicios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.oportunidad-servicios span {
+    padding: 8px 11px;
+    border: 1px solid #f0d6ad;
+    border-radius: 20px;
+    background: #ffffff;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #765326;
+}
+
+/* CONCLUSIÓN Y METODOLOGÍA */
+
+.lectura-dato {
+    margin: 24px 0;
+    padding: 21px 24px;
+    border-radius: 13px;
+    background: #f0f7f5;
+    border: 1px solid #d8eae4;
+}
+
+.lectura-titulo {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    color: #28766c;
+}
+
+.lectura-dato p {
+    margin: 9px 0;
+    font-size: 13px;
+    line-height: 1.65;
+    color: #435b55;
+}
+
+.metodologia-mini {
+    margin-top: 22px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: #f7f8fa;
+    border: 1px solid #e5e7eb;
+}
+
+.metodologia-mini > strong {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #6b7280;
+}
+
+.metodologia-mini p {
+    margin: 9px 0 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #6b7280;
+}
+
+/* ADAPTACIÓN A PANTALLAS ESTRECHAS */
+
+@media (max-width: 650px) {
+    .oportunidad-zona-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .oportunidad-zona-indicadores {
+        gap: 7px;
+    }
+
+    .oportunidad-zona-indicadores strong {
+        font-size: 17px;
+    }
+
+    .oportunidad-nicho {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .oportunidad-propuesta,
+    .lectura-dato {
+        padding: 18px;
+    }
+}
+
+/* MARCADOR · NUEVA ORTOPEDIA */
+
+.marcador-ortopedia-propuesta {
+    background: transparent;
+    border: none;
+}
+
+.marcador-propuesta-pin {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f59e0b;
+    color: #ffffff;
+    border: 3px solid #ffffff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.marcador-propuesta-pin span {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    transform: rotate(45deg);
+}
+
+.popup-ubicacion-propuesta {
+    min-width: 190px;
+}
+
+.popup-ubicacion-propuesta strong {
+    color: #b96b08;
+    font-size: 14px;
+}
+
+.popup-ubicacion-propuesta p {
+    margin: 7px 0;
+    font-size: 12px;
+}
+
+.popup-ubicacion-propuesta span {
+    color: #6b7280;
+    font-size: 11px;
+}
+
+
+/* =========================================
+   OPORTUNIDADES · GRÁFICA COMPARATIVA
+   ========================================= */
+
+.oportunidad-zona-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.oportunidad-zona-card {
+    padding: 18px;
+    background: #ffffff;
+    border: 1px solid #e1e7ef;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(30, 50, 80, 0.04);
+}
+
+.oportunidad-zona-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px 12px;
+    padding-bottom: 13px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #edf0f4;
+}
+
+.oportunidad-zona-cabecera h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 750;
+    color: #26364d;
+}
+
+.oportunidad-zona-cabecera > span {
+    font-size: 11px;
+    color: #68768a;
+}
+
+.oportunidad-grafica-indicador {
+    margin: 14px 0;
+}
+
+.oportunidad-grafica-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 7px;
+}
+
+.oportunidad-grafica-label span {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #667085;
+}
+
+.oportunidad-grafica-label strong {
+    flex-shrink: 0;
+    font-size: 15px;
+    color: #293b54;
+}
+
+.oportunidad-barra-fondo {
+    width: 100%;
+    height: 9px;
+    overflow: hidden;
+    background: #edf1f6;
+    border-radius: 10px;
+}
+
+.oportunidad-barra {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.25s ease;
+}
+
+.oportunidad-barra-mayores {
+    background: #78a5e5;
+}
+
+.oportunidad-barra-discapacidad {
+    background: #65b9a4;
+}
+
+.oportunidad-zona-pie {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px;
+    margin-top: 14px;
+    border-top: 1px solid #edf0f4;
+}
+
+.oportunidad-sin-ortopedia {
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #f3f4f6;
+    color: #596579;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+@media (max-width: 650px) {
+    .oportunidad-zona-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   PROPUESTA DE MERCADO · LISTA DE SERVICIOS
+   ========================================== */
+
+.oportunidad-mercado-visual {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e2e8e7;
+    border-radius: 12px;
+}
+
+/* Cabecera */
+
+.mercado-cabecera {
+    padding: 25px 28px;
+    background: #a8cbc6;
+    border-bottom: 1px solid #dce8e5;
+}
+
+.mercado-etiqueta {
+    display: block;
+    margin-bottom: 10px;
+    color: #477c73;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+.mercado-cabecera h4 {
+    margin: 0 0 8px;
+    color: #293f49;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.mercado-cabecera p {
+    max-width: 650px;
+    margin: 0;
+    color: #63747b;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+/* Lista de servicios */
+
+.mercado-lista {
+    padding: 5px 28px;
+}
+
+.mercado-fila {
+    display: grid;
+    grid-template-columns: minmax(155px, 0.8fr) minmax(0, 1.6fr);
+    gap: 24px;
+    align-items: start;
+    padding: 19px 0;
+    border-bottom: 1px solid #e9eeed;
+}
+
+.mercado-fila:last-child {
+    border-bottom: none;
+}
+
+.mercado-categoria {
+    position: relative;
+    padding-left: 16px;
+    color: #354f58;
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.55;
+}
+
+.mercado-categoria::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 0;
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background: #72a99d;
+}
+
+.mercado-descripcion {
+    color: #63717c;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Valor diferencial */
+
+.mercado-diferencial {
+    margin: 12px 28px 25px;
+    padding: 16px 18px;
+    background: #f7f9f8;
+    border-left: 3px solid #72a99d;
+    border-radius: 4px;
+}
+
+.mercado-diferencial strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #477c73;
+    font-size: 10px;
+    letter-spacing: 1.1px;
+}
+
+.mercado-diferencial p {
+    margin: 0;
+    color: #52666a;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* Móvil */
+
+@media (max-width: 600px) {
+    .mercado-cabecera {
+        padding: 21px 19px;
+    }
+
+    .mercado-cabecera h4 {
+        font-size: 20px;
+    }
+
+    .mercado-lista {
+        padding: 4px 19px;
+    }
+
+    .mercado-fila {
+        grid-template-columns: 1fr;
+        gap: 5px;
+        padding: 16px 0;
+    }
+
+    .mercado-diferencial {
+        margin: 10px 19px 19px;
+    }
+}
+
+
+/* Propuesta de mercado: lista simplificada */
+
+.mercado-lista {
+    padding: 8px 28px;
+}
+
+.mercado-fila {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9eeed;
+}
+
+.mercado-fila:last-child {
+    border-bottom: none;
+}
+
+.mercado-categoria {
+    position: relative;
+    padding-left: 20px;
+    color: #354f58;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.mercado-categoria::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a8cbc6;
+}
+
+@media (max-width: 600px) {
+    .mercado-lista {
+        padding: 6px 19px;
+    }
+}
+
+
+/* Oportunidades: indicadores compactos */
+
+.oportunidad-datos-compactos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.oportunidad-dato-card {
+    min-width: 0;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #e2e8e7;
+    border-radius: 12px;
+}
+
+.oportunidad-dato-etiqueta {
+    display: block;
+    margin-bottom: 12px;
+    color: #477c73;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1px;
+}
+
+.oportunidad-dato-valor {
+    color: #293f49;
+    font-size: 29px;
+    font-weight: 750;
+    line-height: 1.2;
+}
+
+.oportunidad-dato-valor span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.oportunidad-dato-card p {
+    margin: 12px 0 0;
+    color: #63747b;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+@media (max-width: 600px) {
+    .oportunidad-datos-compactos {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.integrantes {
+    margin: 0;
+    text-align: right;
+    max-width: 300px;
+}
+
+
+
+
+
+
+
+
+
