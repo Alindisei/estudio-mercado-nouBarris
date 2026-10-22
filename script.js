@@ -197,29 +197,7 @@ function mostrarPerfilNouBarris() {
         </div>
 
             
-            <div class="territorio-detalle">
-                <summary>Nivell educatiu · consulta per barri · 2024</summary>
-
-                <p class="territorio-nota">
-                    Recompte de persones de 16 o més anys per nivell educatiu.
-                    Seleccioneu un barri per consultar les vostres dades.
-                </p>
-
-                <label class="educacion-label" for="selector-educacion">
-                    Barri
-                </label>
-
-                <select id="selector-educacion" class="educacion-selector">
-                    ${Object.keys(datosTerritorioPorBarrio).map(function(barrio) {
-                        return `<option value="${barrio}">${barrio}</option>`;
-                    }).join("")}
-                </select>
-
-                <div id="grafico-educacion" class="grafico-educacion"></div>
-
-            </div>
-
-            
+                   
                 
             
         <div class="territorio-detalle">
@@ -3535,7 +3513,7 @@ contenidoSeccion.innerHTML = `
                     <span class="cruce-kicker">DADES DETALLADES</span>
                     <h4>Comparativa dels 13 barris</h4>
                 </div>
-                <span class="cruce-unidad">9 indicadors</span>
+                
             </div>
 
             <div class="cruce-tabla">
@@ -4114,6 +4092,30 @@ contenidoSeccion.innerHTML = `
         <div class="mercado-fila">
             <div class="mercado-categoria">
                 Sillas de ruedas, andadores y productos de apoyo
+            </div>
+        </div>
+
+        <div class="mercado-fila">
+            <div class="mercado-categoria">
+                Lloguer d’ajudes tècniques
+            </div>
+        </div>
+
+        <div class="mercado-fila">
+            <div class="mercado-categoria">
+                Dispensació de prestacions del CatSalut 
+            </div>
+        </div>
+
+        <div class="mercado-fila">
+            <div class="mercado-categoria">
+                Canals de comunicació actius 
+            </div>
+        </div>
+
+        <div class="mercado-fila">
+            <div class="mercado-categoria">
+                Col·laboració amb els CAP y centres de rehabilitació
             </div>
         </div>
 
