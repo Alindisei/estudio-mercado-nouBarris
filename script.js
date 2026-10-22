@@ -1331,8 +1331,12 @@ function mostrarOferta() {
                 <h4>Oferta clave</h4>
 
                 <ul class="oferta-lista">
-                    <li>Òrtesi</li>
-                    <li>Prótesi</li>
+                    <li>Fabricació a mida: Òrtesi i Prótesi</li>
+                    <li>Calçat ortopédic estàndard i a mida</li>
+                    <li>Peces de compressió estàndard i a mida</li>
+                    <li>Reparació i manteniment</li>
+                    <li>Assesorament</li>
+                    <li>Gruas, bipedestadors, cadiras de rodas i scooters</li>
                     <li>Plantilles ortopèdiques</li>
                 </ul>
 
