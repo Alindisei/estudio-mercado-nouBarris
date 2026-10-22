@@ -4122,34 +4122,7 @@ contenidoSeccion.innerHTML = `
 </div>
 
 
-
-                <!-- CONCLUSIÓN -->
-
-                <div class="lectura-dato">
-
-                    <span class="lectura-titulo">
-                        CONCLUSIÓ
-                    </span>
-
-                    <p>
-                        La selecció dels barris permet estudiar
-                        una possible àrea d'influència de ${formatoNumero(poblacionArea)}
-                        habitants, amb diferents perfils demogràfics
-                        i necessitats potencials.
-                    </p>
-
-                    <p>
-                       Una ortopèdia especialitzada en una ubicació
-                        accessible de la zona nord podria complementar
-                        l'oferta existent i orientar els vostres serveis
-                        a persones grans, persones amb discapacitat
-                        i població infantil.
-                    </p>
-
-
-                </div>
-
-
+        
             `;
 
             return;
